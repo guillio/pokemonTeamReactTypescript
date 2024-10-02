@@ -14,7 +14,6 @@ const Home = (props: Props) => {
   const returnPokemonsCall = async () => {
     const data = await returnPokemons();
 
-    console.log({ data });
     const pokemonsPromises = data.results.map((pokemonPro) =>
       returnPokemonInfoByUrl(pokemonPro.url)
     );
