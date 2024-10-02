@@ -1,15 +1,24 @@
-export const initialState = [];
+export const initialState = { pokemonTeam: [] };
 
 export const pokemonsReducer = (state, action) => {
   switch (action.type) {
-    case "ADD_POKEMON": {
+    case "ADD_POKEMON_TO_TEAM": {
+      const { pokemonTeam } = state;
+      console.log("Entra");
+      console.log({ pokemonTeam });
       const newPokemon = action.payload;
 
-      const pokemonExists = state.some(
-        (pokemon) => pokemon.name === newPokemon.name
+      const pokemonExists = pokemonTeam.pokemonTeam.some(
+        (pokemon) => pokemon.id === newPokemon.id
       );
 
-      return pokemonExists && [...state, newPokemon];
+      const pokemonTeamArray = pokemonTeam.length > 0 ? pokemonTeam : [];
+
+      console.log({ pokemonTeamArray });
+
+      return pokemonExists
+        ? state
+        : { ...state, pokemonTeam: pokemonTeamArray.push(newPokemon) };
     }
   }
 };

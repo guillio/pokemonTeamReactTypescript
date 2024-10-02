@@ -1,6 +1,14 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { PokemonsContext } from "../../../context/PokemonsContext";
 
 export const PokemonCard = ({ pokemon }) => {
+  const { dispatch } = useContext(PokemonsContext);
+
+  const addToTeam = () => {
+    dispatch({ type: "ADD_POKEMON_TO_TEAM", payload: pokemon });
+  };
+
   return (
     <div>
       <img
@@ -15,7 +23,7 @@ export const PokemonCard = ({ pokemon }) => {
       </div>
 
       <Link to={`/pokemon/${pokemon.id}`}>CHECK POKEMON</Link>
-      <button>ADD TO TEAM</button>
+      <button onClick={addToTeam}>ADD TO TEAM</button>
     </div>
   );
 };
